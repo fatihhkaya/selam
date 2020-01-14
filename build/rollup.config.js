@@ -6,7 +6,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import minify from 'rollup-plugin-babel-minify'
 import postcss from 'rollup-plugin-postcss'
-import { name, version, dependencies, peerDependencies } from '../package.json'
+import { name,  dependencies, peerDependencies } from '../package.json'
 
 const PATHS = {
   INPUT: path.resolve(__dirname, '..', 'components', 'index.js'),
@@ -24,14 +24,7 @@ function camelize(str) {
     })
 }
 
-const year = new Date().getFullYear()
-const banner = `/*
-* Shards React v${version} (https://designrevision.com/downloads/shards-react/)
-* Based on: Bootstrap ${dependencies.bootstrap} (https://getbootstrap.com)
-* Based on: Shards ${dependencies['shards-ui']} (https://designrevision.com/downloads/shards/)
-* Copyright 2017-${year} DesignRevision (https://designrevision.com)
-* Copyright 2017-${year} Catalin Vasile (http://catalin.me)
-*/`
+
 
 const globals = {
   react: 'React',
@@ -75,7 +68,7 @@ function createBaseConfig(callback) {
 const CommonJSConfig = createBaseConfig(function(config) {
   return Object.assign({}, config, {
     output: {
-      banner,
+    
       name: camelize(name),
       sourcemap: true,
       format: 'cjs',
@@ -87,7 +80,7 @@ const CommonJSConfig = createBaseConfig(function(config) {
 const ESModulesConfig = createBaseConfig(function(config) {
   return Object.assign({}, config, {
     output: {
-      banner,
+      
       name: camelize(name),
       sourcemap: true,
       format: 'es',
@@ -99,7 +92,7 @@ const ESModulesConfig = createBaseConfig(function(config) {
 const UMDConfig = createBaseConfig(function(config) {
   return Object.assign({}, config, {
     output: {
-      banner,
+      
       name: camelize(name),
       sourcemap: true,
       globals: globals,
@@ -114,7 +107,7 @@ const MinifiedUMDConfig = createBaseConfig(function(config) {
 
   return Object.assign({}, config, {
     output: {
-      banner,
+      
       name: camelize(name),
       sourcemap: true,
       globals: globals,
